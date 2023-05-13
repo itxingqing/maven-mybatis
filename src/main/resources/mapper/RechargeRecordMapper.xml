@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiker.recharge.mapper.RechargeRecordMapper">
+  <resultMap id="BaseResultMap" type="com.jiker.recharge.domain.RechargeRecordEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="pre_money" jdbcType="DOUBLE" property="preMoney" />
+    <result column="aft_money" jdbcType="DOUBLE" property="aftMoney" />
+    <result column="line" jdbcType="VARCHAR" property="line" />
+    <result column="dot_name" jdbcType="VARCHAR" property="dotName" />
+    <result column="dot_number" jdbcType="INTEGER" property="dotNumber" />
+    <result column="equipment_name" jdbcType="VARCHAR" property="equipmentName" />
+    <result column="equipment_number" jdbcType="INTEGER" property="equipmentNumber" />
+    <result column="transaction_time" jdbcType="TIMESTAMP" property="transactionTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, `type`, pre_money, aft_money, line, dot_name, dot_number, equipment_name, equipment_number, 
+    transaction_time
+  </sql>
+
+  <select id="queryAllRechargeRecord" resultMap="BaseResultMap">
+    select
+
+    <include refid="Base_Column_List" />
+    from tb_recharge_record
+
+  </select>
+
+  <select id="getRechargeRecordById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+
+    <include refid="Base_Column_List" />
+
+    from tb_recharge_record
+
+    where id = #{cardId}
+
+  </select>
+
+  <insert id="insert" parameterType="com.jiker.recharge.domain.RechargeRecordEntity">
+    insert into tb_recharge_record (id, `type`, pre_money,
+      aft_money, line, dot_name,
+      dot_number, equipment_name, equipment_number,
+      transaction_time)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{preMoney,jdbcType=DOUBLE},
+      #{aftMoney,jdbcType=DOUBLE}, #{line,jdbcType=VARCHAR}, #{dotName,jdbcType=VARCHAR},
+      #{dotNumber,jdbcType=INTEGER}, #{equipmentName,jdbcType=VARCHAR}, #{equipmentNumber,jdbcType=INTEGER},
+      #{transactionTime,jdbcType=TIMESTAMP})
+  </insert>
+
+</mapper>

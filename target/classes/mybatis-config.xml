@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--设置类型所在包，可写可不写-->
+    <typeAliases>
+        <package name="com.jiker.recharge.domain"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <!--指定编码格式为UTF-8-->
+                <property name="url" value="jdbc:mysql://localhost/jk_pro_db?characterEncoding=UTF8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai&amp;allowMultiQueries=true"/>
+                <!--数据库账号密码-->
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--加载mysql临时文件，sql映射文件-->
+        <mapper resource="mapper/RechargeRecordMapper.xml"/>
+    </mappers>
+</configuration>
