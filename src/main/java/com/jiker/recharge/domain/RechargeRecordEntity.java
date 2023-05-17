@@ -1,5 +1,6 @@
 package com.jiker.recharge.domain;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -115,6 +116,46 @@ public class RechargeRecordEntity {
         sb.append(", 卡余额：").append(aftMoney);
         sb.append(", 交易时间：").append(transactionTime);
         return sb.toString();
+    }
+
+    /**
+     * 封装数据库实体
+     * @return
+     */
+    public static RechargeRecordEntity to(int cardId, double money) {
+
+        RechargeRecordEntity rechargeRecordEntity = new RechargeRecordEntity();
+        rechargeRecordEntity.setId(cardId);
+        rechargeRecordEntity.setType("普通充值卡");
+        rechargeRecordEntity.setPreMoney(0.0);
+        rechargeRecordEntity.setAftMoney(money);
+        rechargeRecordEntity.setLine("16号线");
+        rechargeRecordEntity.setDotName("极客学院网点");
+        rechargeRecordEntity.setDotNumber(2005486);
+        rechargeRecordEntity.setEquipmentName("自助充值机");
+        rechargeRecordEntity.setEquipmentNumber(15864525);
+        rechargeRecordEntity.setTransactionTime(new Timestamp(System.currentTimeMillis()));
+
+        return rechargeRecordEntity;
+
+    }
+
+    /**
+     * 转换为更新数据实体
+     * @param money 此次变动的金额
+     * @param state true为充值，false为刷卡
+     * @return
+     */
+    public RechargeRecordEntity updateMoneyEntity(double money, boolean state) {
+
+        RechargeRecordEntity rechargeRecordEntity = new RechargeRecordEntity();
+        rechargeRecordEntity.setId(this.getId());
+        rechargeRecordEntity.setPreMoney(this.aftMoney);
+        rechargeRecordEntity.setAftMoney(state==true ? this.aftMoney + money : this.aftMoney - money);
+        rechargeRecordEntity.setTransactionTime(new Timestamp(System.currentTimeMillis()));
+
+        return rechargeRecordEntity;
+
     }
 
 }

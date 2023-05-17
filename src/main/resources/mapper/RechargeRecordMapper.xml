@@ -49,4 +49,13 @@
       #{transactionTime,jdbcType=TIMESTAMP})
   </insert>
 
+  <update id="updateByPrimaryKey" parameterType="com.jiker.recharge.domain.RechargeRecordEntity">
+    update tb_recharge_record
+    set
+      pre_money = #{preMoney,jdbcType=DOUBLE},
+      aft_money = #{aftMoney,jdbcType=DOUBLE},
+      transaction_time = #{transactionTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
 </mapper>

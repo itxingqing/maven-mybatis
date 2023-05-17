@@ -28,6 +28,12 @@ public interface RechargeRecordMapper {
      */
     int insert(RechargeRecordEntity record);
 
+    /**
+     * 修改充值卡信息
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKey(RechargeRecordEntity record);
 
 
 }

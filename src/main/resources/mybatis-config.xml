@@ -16,7 +16,7 @@
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <!--指定编码格式为UTF-8-->
                 <property name="url" value="jdbc:mysql://localhost/jk_pro_db?characterEncoding=UTF8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai&amp;allowMultiQueries=true"/>
-                <!--数据库账号密码-->
+                <!  --数据库账号密码-->
                 <property name="username" value="root"/>
                 <property name="password" value="root"/>
             </dataSource>
