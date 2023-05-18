@@ -1,5 +1,6 @@
 package com.jiker.recharge.domain;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -11,9 +12,9 @@ public class RechargeRecordEntity {
 
     private String type;
 
-    private Double preMoney;
+    private BigDecimal preMoney;
 
-    private Double aftMoney;
+    private BigDecimal aftMoney;
 
     private String line;
 
@@ -43,19 +44,19 @@ public class RechargeRecordEntity {
         this.type = type;
     }
 
-    public Double getPreMoney() {
+    public BigDecimal getPreMoney() {
         return preMoney;
     }
 
-    public void setPreMoney(Double preMoney) {
+    public void setPreMoney(BigDecimal preMoney) {
         this.preMoney = preMoney;
     }
 
-    public Double getAftMoney() {
+    public BigDecimal getAftMoney() {
         return aftMoney;
     }
 
-    public void setAftMoney(Double aftMoney) {
+    public void setAftMoney(BigDecimal aftMoney) {
         this.aftMoney = aftMoney;
     }
 
@@ -127,8 +128,8 @@ public class RechargeRecordEntity {
         RechargeRecordEntity rechargeRecordEntity = new RechargeRecordEntity();
         rechargeRecordEntity.setId(cardId);
         rechargeRecordEntity.setType("普通充值卡");
-        rechargeRecordEntity.setPreMoney(0.0);
-        rechargeRecordEntity.setAftMoney(money);
+        rechargeRecordEntity.setPreMoney(BigDecimal.valueOf(0));
+        rechargeRecordEntity.setAftMoney(BigDecimal.valueOf(money));
         rechargeRecordEntity.setLine("16号线");
         rechargeRecordEntity.setDotName("极客学院网点");
         rechargeRecordEntity.setDotNumber(2005486);
@@ -151,7 +152,7 @@ public class RechargeRecordEntity {
         RechargeRecordEntity rechargeRecordEntity = new RechargeRecordEntity();
         rechargeRecordEntity.setId(this.getId());
         rechargeRecordEntity.setPreMoney(this.aftMoney);
-        rechargeRecordEntity.setAftMoney(state==true ? this.aftMoney + money : this.aftMoney - money);
+        rechargeRecordEntity.setAftMoney(state==true ? this.aftMoney.add(BigDecimal.valueOf(money)) : this.aftMoney.subtract(BigDecimal.valueOf(money)));
         rechargeRecordEntity.setTransactionTime(new Timestamp(System.currentTimeMillis()));
 
         return rechargeRecordEntity;
